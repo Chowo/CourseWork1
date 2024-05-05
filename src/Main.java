@@ -1,25 +1,25 @@
 public class Main {
 
     public static void main(String[] args) {
-        Employee[] employees = new Employee[10];
-        employees[0] = new Employee("Иванов Максим Павлович", 1, 67852.36);
-        employees[1] = new Employee("Петров Никита Иванович", 1, 88745.72);
-        employees[2] = new Employee("Николаева Анна Владимировна", 2, 79852.17);
-        employees[3] = new Employee("Смоляков Вадим Вадимович", 3, 65887.53);
-        employees[4] = new Employee("Никифоров Александр Николаевич", 2, 58442.45);
-        employees[5] = new Employee("Владимирова Илана Викторовна", 4, 100456.87);
-        employees[6] = new Employee("Графов Петр Иванович", 4, 72454.79);
-        employees[7] = new Employee("Смирнов Кирилл Сергеевич", 5, 72454.79);
-        employees[8] = new Employee("Клементьева Раиса Павловна", 5, 85456.95);
+        EmployeeBook employeeBook = new EmployeeBook(10);
+
+        employeeBook.addNewEmployee(new Employee("Иванов Максим Павлович", 1, 67852.36));
+        employeeBook.addNewEmployee(new Employee("Петров Никита Иванович", 1, 88745.72));
+        employeeBook.addNewEmployee(new Employee("Николаева Анна Владимировна", 2, 79852.17));
+        employeeBook.addNewEmployee(new Employee("Смоляков Вадим Вадимович", 3, 65887.53));
+        employeeBook.addNewEmployee(new Employee("Никифоров Александр Николаевич", 2, 58442.45));
+        employeeBook.addNewEmployee(new Employee("Владимирова Илана Викторовна", 4, 100456.87));
+        employeeBook.addNewEmployee(new Employee("Графов Петр Иванович", 4, 72454.79));
+        employeeBook.addNewEmployee(new Employee("Смирнов Кирилл Сергеевич", 5, 72454.79));
+        employeeBook.addNewEmployee(new Employee("Клементьева Раиса Павловна", 5, 85456.95));
         //employees[9] = new Employee("Ивановская Мария Глебовна", 4, 69785.15);
 
-        EmployeeBook employeeBook = new EmployeeBook(employees);
         employeeBook.addNewEmployee(new Employee("Ивановская Мария Глебовна", 4, 69785.15));
         employeeBook.printEmployeesData();
         System.out.printf("Общие расходы за месяц на оплату труда составляют %.2f рублей%n",
                 employeeBook.calculateSalaryExpenses());
-        employeeBook.findLowestSalaryEmployee();
-        employeeBook.findHighestSalaryEmployee();
+        employeeBook.printLowestSalaryEmployee();
+        employeeBook.printHighestSalaryEmployee();
         System.out.printf("Средняя заработная плата составляет %.2f рублей%n",
                 employeeBook.calculateAverageSalary());
         employeeBook.printEmployeesNames();
@@ -44,6 +44,11 @@ public class Main {
         System.out.println(employeeBook.getEmployeeByID(5));
         System.out.println(employeeBook.getEmployeeByID(10));
         System.out.println(employeeBook.getEmployeeByID(15));
+
+        employeeBook.deleteEmployee(7);
+        employeeBook.printEmployeesNames();
+        employeeBook.printEmployeesData();
+        System.out.println(employeeBook.calculateAverageSalary());
 
     }
 }

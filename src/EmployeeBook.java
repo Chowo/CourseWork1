@@ -1,12 +1,17 @@
+import java.util.Objects;
+
 public class EmployeeBook {
     private Employee[] employees;
 
-    public EmployeeBook(Employee[] employees) {
-        this.employees = employees;
+    public EmployeeBook(int employeeBookSize) {
+        this.employees = new Employee[employeeBookSize];
     }
 
     public void printEmployeesData() {
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             System.out.println(employee);
         }
     }
@@ -14,15 +19,20 @@ public class EmployeeBook {
     public double calculateSalaryExpenses() {
         double expenses = 0.0;
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             expenses += employee.getSalary();
         }
-        System.out.printf("Общие расходы за месяц на оплату труда составляют %.2f рублей%n", expenses);
         return expenses;
     }
 
-    public void findLowestSalaryEmployee() {
+    public void printLowestSalaryEmployee() {
         int employeeIndex = 0;
         for (int i = 0; i < employees.length; i++) {
+            if (Objects.isNull(employees[i])) {
+                continue;
+            }
             if (employees[employeeIndex].getSalary() > employees[i].getSalary()) {
                 employeeIndex = i;
             }
@@ -30,9 +40,12 @@ public class EmployeeBook {
         System.out.printf("Работник с наименьшей зарплатой: %s%n", employees[employeeIndex].getFullName());
     }
 
-    public void findHighestSalaryEmployee() {
+    public void printHighestSalaryEmployee() {
         int employeeIndex = 0;
         for (int i = 0; i < employees.length; i++) {
+            if (Objects.isNull(employees[i])) {
+                continue;
+            }
             if (employees[employeeIndex].getSalary() < employees[i].getSalary()) {
                 employeeIndex = i;
             }
@@ -46,36 +59,44 @@ public class EmployeeBook {
 
     public void printEmployeesNames() {
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             System.out.println(employee.getFullName());
         }
     }
 
     public void conductIndexation(double indexation) {
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             double indexationResult = employee.getSalary() + employee.getSalary() * indexation / 100;
             employee.setSalary(indexationResult);
         }
     }
 
+    //Вспомогательный Метод для поиска первого индекса работника работающего в искомом отделе для сравнения зарплат
     private int findFirstDepartmentEmployeeIndex(int department) {
         int departmentIndex = -1;
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             if (employee.getDepartment() == department) {
                 departmentIndex = employee.getDepartment();
                 return departmentIndex;
             }
         }
-        if (departmentIndex < 0) {
             throw new IndexOutOfBoundsException("В отделе" + department + " нет работников");
-        }
-        return departmentIndex;
     }
 
     public void findDepartmentLowestSalaryEmployee(int department) {
         int employeeIndex = findFirstDepartmentEmployeeIndex(department);
-        int departmentSize = getDepartmentSize(department);
-
         for (int i = 0; i < employees.length; i++) {
+            if (Objects.isNull(employees[i])) {
+                continue;
+            }
             if (employees[i].getDepartment() == department &&
                     employees[employeeIndex].getSalary() > employees[i].getSalary()) {
                 employeeIndex = i;
@@ -90,6 +111,9 @@ public class EmployeeBook {
 
 
         for (int i = 0; i < employees.length; i++) {
+            if (Objects.isNull(employees[i])) {
+                continue;
+            }
             if (employees[i].getDepartment() == department &&
                     employees[employeeIndex].getSalary() < employees[i].getSalary()) {
                 employeeIndex = i;
@@ -102,6 +126,9 @@ public class EmployeeBook {
     public double calculateDepartmentSalaryExpenses(int department) {
         double expenses = 0.0;
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             if (employee.getDepartment() == department) {
                 expenses += employee.getSalary();
             }
@@ -117,6 +144,9 @@ public class EmployeeBook {
     private int getDepartmentSize(int department) {
         int departmentEmployeeCounter = 0;
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             if (employee.getDepartment() == department) {
                 departmentEmployeeCounter++;
             }
@@ -127,6 +157,9 @@ public class EmployeeBook {
 
     public void conductDepartmentIndexation(int department, double indexation) {
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             if (employee.getDepartment() == department) {
                 double indexationResult = employee.getSalary() + employee.getSalary() * indexation / 100;
                 employee.setSalary(indexationResult);
@@ -137,6 +170,9 @@ public class EmployeeBook {
     public void printDepartmentEmployees(int department) {
         System.out.printf("Работники отдела %s:%n", department);
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             if (employee.getDepartment() == department) {
                 System.out.printf("ФИО - %s. Зарплата - %.2f рублей. ID работника - %s%n",
                         employee.getFullName(), employee.getSalary(), employee.getId());
@@ -147,6 +183,9 @@ public class EmployeeBook {
     public void printEmployeesWithLowerSalary(double checkSalary) {
         System.out.printf("Работники с зарплатой ниже %.2f рублей%n", checkSalary);
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             if (employee.getSalary() < checkSalary) {
                 System.out.printf("ID работника - %s. ФИО - %s. Зарплата - %.2f рублей%n",
                         employee.getId(), employee.getFullName(), employee.getSalary());
@@ -157,6 +196,9 @@ public class EmployeeBook {
     public void printEmployeesWithHigherSalary(double checkSalary) {
         System.out.printf("Работники с зарплатой выше %.2f рублей%n", checkSalary);
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             if (employee.getSalary() > checkSalary) {
                 System.out.printf("ID работника - %s. ФИО - %s. Зарплата - %.2f рублей%n",
                         employee.getId(), employee.getFullName(), employee.getSalary());
@@ -176,6 +218,9 @@ public class EmployeeBook {
 
     public boolean deleteEmployee(int deletableEmployeeId) {
         for (int i = 0; i < employees.length; i++) {
+            if (Objects.isNull(employees[i])) {
+                continue;
+            }
             if (employees[i].getId() == deletableEmployeeId) {
                 employees[i] = null;
                 return true;
@@ -186,12 +231,14 @@ public class EmployeeBook {
 
     public Employee getEmployeeByID(int id) {
         for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
+                continue;
+            }
             if (employee.getId() == id) {
                 return employee;
             }
         }
-        System.out.printf("Работник с ID номером - %s не найден%n", id);
-        return null;
+        throw new IllegalArgumentException("Работника с указанным ID не существует");
     }
 
 

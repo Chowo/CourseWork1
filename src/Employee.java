@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Employee {
     private String fullName;
     private int department;
@@ -54,7 +56,7 @@ public class Employee {
     }
 
     public int hashCode() {
-        return java.util.Objects.hash(getFullName(), getId());
+        return Objects.hash(getFullName(), getId());
     }
 
     public String toString() {
