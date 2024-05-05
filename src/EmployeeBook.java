@@ -76,51 +76,42 @@ public class EmployeeBook {
         }
     }
 
-    //Вспомогательный Метод для поиска первого индекса работника работающего в искомом отделе для сравнения зарплат
-    private int findFirstDepartmentEmployeeIndex(int department) {
-        int departmentIndex = -1;
+    public void findDepartmentLowestSalaryEmployee(int department) {
+        Employee comparableEmployee = employees[0];
+        int departmentEmployeeCounter = 0;
         for (Employee employee : employees) {
             if (Objects.isNull(employee)) {
                 continue;
             }
-            if (employee.getDepartment() == department) {
-                departmentIndex = employee.getDepartment();
-                return departmentIndex;
+            if (employee.getDepartment() == department &&
+                    comparableEmployee.getSalary() > employee.getSalary()) {
+                comparableEmployee = employee;
+                departmentEmployeeCounter++;
             }
         }
+        if (departmentEmployeeCounter == 0) {
             throw new IndexOutOfBoundsException("В отделе" + department + " нет работников");
-    }
-
-    public void findDepartmentLowestSalaryEmployee(int department) {
-        int employeeIndex = findFirstDepartmentEmployeeIndex(department);
-        for (int i = 0; i < employees.length; i++) {
-            if (Objects.isNull(employees[i])) {
-                continue;
-            }
-            if (employees[i].getDepartment() == department &&
-                    employees[employeeIndex].getSalary() > employees[i].getSalary()) {
-                employeeIndex = i;
-            }
-        }
-        System.out.printf("Работник с наименьшей зарплатой в отделе %s: %s%n",
-                department, employees[employeeIndex].getFullName());
+        } else System.out.printf("Работник с наименьшей зарплатой в отделе %s: %s%n",
+                department, comparableEmployee.getFullName());
     }
 
     public void findDepartmentHighestSalaryEmployee(int department) {
-        int employeeIndex = findFirstDepartmentEmployeeIndex(department);
-
-
-        for (int i = 0; i < employees.length; i++) {
-            if (Objects.isNull(employees[i])) {
+        Employee comparableEmployee = employees[0];
+        int departmentEmployeeCounter = 0;
+        for (Employee employee : employees) {
+            if (Objects.isNull(employee)) {
                 continue;
             }
-            if (employees[i].getDepartment() == department &&
-                    employees[employeeIndex].getSalary() < employees[i].getSalary()) {
-                employeeIndex = i;
+            if (employee.getDepartment() == department &&
+                    comparableEmployee.getSalary() < employee.getSalary()) {
+                comparableEmployee = employee;
+                departmentEmployeeCounter++;
             }
         }
-        System.out.printf("Работник с наименьшей зарплатой в отделе %s: %s%n",
-                department, employees[employeeIndex].getFullName());
+        if (departmentEmployeeCounter == 0) {
+            throw new IndexOutOfBoundsException("В отделе" + department + " нет работников");
+        } else System.out.printf("Работник с наименьшей зарплатой в отделе %s: %s%n",
+                department, comparableEmployee.getFullName());
     }
 
     public double calculateDepartmentSalaryExpenses(int department) {
