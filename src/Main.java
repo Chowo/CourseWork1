@@ -12,7 +12,6 @@ public class Main {
         employeeBook.addNewEmployee(new Employee("Графов Петр Иванович", 4, 72454.79));
         employeeBook.addNewEmployee(new Employee("Смирнов Кирилл Сергеевич", 5, 72454.79));
         employeeBook.addNewEmployee(new Employee("Клементьева Раиса Павловна", 5, 85456.95));
-        //employees[9] = new Employee("Ивановская Мария Глебовна", 4, 69785.15);
 
         employeeBook.addNewEmployee(new Employee("Ивановская Мария Глебовна", 4, 69785.15));
         employeeBook.printEmployeesData();
@@ -25,8 +24,8 @@ public class Main {
         employeeBook.printEmployeesNames();
         employeeBook.conductIndexation(0.1);
         employeeBook.printEmployeesData();
-        employeeBook.findDepartmentLowestSalaryEmployee(4);
-        employeeBook.findDepartmentHighestSalaryEmployee(4);
+        employeeBook.printDepartmentLowestSalaryEmployee(4);
+        employeeBook.printDepartmentHighestSalaryEmployee(4);
         System.out.printf("Общие расходы за месяц на оплату труда составляют %.2f рублей%n",
                 employeeBook.calculateDepartmentSalaryExpenses(4));
         System.out.printf("Средняя заработная плата составляет %.2f рублей%n",
@@ -41,14 +40,20 @@ public class Main {
         System.out.println(employeeBook.addNewEmployee(new Employee("DDD", 4, 69785.15)));
         employeeBook.printEmployeesData();
 
-        System.out.println(employeeBook.getEmployeeByID(5));
+
         System.out.println(employeeBook.getEmployeeByID(10));
-        System.out.println(employeeBook.getEmployeeByID(15));
+
 
         employeeBook.deleteEmployee(7);
         employeeBook.printEmployeesNames();
         employeeBook.printEmployeesData();
         System.out.println(employeeBook.calculateAverageSalary());
+        employeeBook.printLowestSalaryEmployee();
+        employeeBook.printDepartmentLowestSalaryEmployee(4);
+        employeeBook.printDepartmentLowestSalaryEmployee(5);
+        employeeBook.printDepartmentHighestSalaryEmployee(2);
+        employeeBook.printDepartmentHighestSalaryEmployee(3);
+        employeeBook.printDepartmentHighestSalaryEmployee(4);
 
     }
 }

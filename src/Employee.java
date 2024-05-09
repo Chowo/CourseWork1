@@ -46,6 +46,9 @@ public class Employee {
     }
 
     public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
         if (this.getClass() != object.getClass()) {
             return false;
         }
